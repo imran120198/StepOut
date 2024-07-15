@@ -1,9 +1,13 @@
 const mongoose = require("mongoose");
 
 const BookingSchema = mongoose.Schema({
-  user_id: { type: Schema.Types.ObjectId, ref: "User", required: true },
-  train_id: { type: Schema.Types.ObjectId, ref: "Train", required: true },
-  seat_number: { type: Number, required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User"},
+  trainId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Train",
+  },
+  seatsBooked: { type: Number, required: true },
+  bookingDate: { type: Date, default: Date.now },
 });
 
 const BookingModel = mongoose.model("Booking", BookingSchema);

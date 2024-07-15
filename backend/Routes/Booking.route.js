@@ -19,7 +19,7 @@ BookingRoute.post("/", authentication, async (req, res) => {
     }
 
     const updatedTrain = await TrainModel.findOneAndUpdate(
-      { _id: trainId, availableSeats: { $gte: seats } },
+      { trainId: trainId, availableSeats: { $gte: seats } },
       { $inc: { availableSeats: -seats } },
       { new: true }
     );

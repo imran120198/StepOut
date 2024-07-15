@@ -1,14 +1,14 @@
 const { Router } = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const { UserModel } = require("../Schema/User.schema");
+const { UserModel } = require("../Model/User.model");
 
 const UserRouter = Router();
 
 // signup
 UserRouter.post("/signup", async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password, role } = req.body;
     const result = await UserModel.findOne({ email });
     if (result) {
       res.status(201).send({ message: "Email Already Exist" });
@@ -21,6 +21,7 @@ UserRouter.post("/signup", async (req, res) => {
             username: username,
             email: email,
             password: hash,
+            role: role,
           });
           const saveSignup = newSignup.save();
           res.status(201).send({ message: "Signup Successfully", saveSignup });

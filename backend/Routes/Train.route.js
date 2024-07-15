@@ -7,8 +7,9 @@ const TrainRouter = Router();
 // Add Train
 TrainRouter.post("/", adminAuth, async (req, res) => {
   try {
-    const { name, source, destination, totalSeats } = req.body;
+    const { trainId, name, source, destination, totalSeats } = req.body;
     const train = new TrainModel({
+      trainId,
       name,
       source,
       destination,

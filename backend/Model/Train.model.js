@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 
 const TrainSchema = mongoose.Schema(
   {
-    train_id: { type: String, required: true, unique: true },
-    train_name: { type: String, required: true },
+    trainId: { type: String, unique: true },
+    name: { type: String, required: true },
     source: { type: String, required: true },
     destination: { type: String, required: true },
-    total_seats: { type: Number, required: true },
-    available_seats: { type: Number, required: true },
+    totalSeats: { type: Number, required: true },
+    availableSeats: { type: Number, required: true },
   },
   { timestamps: true }
 );
