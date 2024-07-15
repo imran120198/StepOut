@@ -9,16 +9,19 @@ const Navbar = () => {
       </div>
       <div className="flex justify-between gap-4">
         <div>
-          <Link to="/home">Home</Link>
+          <Link to="/">Home</Link>
         </div>
         <div>
           <Link to="/booking">Ticket</Link>
         </div>
         <div>
+          <Link to="/addTrain">Add Train</Link>
+        </div>
+        <div>
           <Link to="/login">Login</Link>
         </div>
         <div>
-          <Link to="/">Signup</Link>
+          <Link to="/signup">Signup</Link>
         </div>
       </div>
     </div>

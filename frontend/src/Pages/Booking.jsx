@@ -6,12 +6,12 @@ const Booking = () => {
   const [trainId, setTrainId] = useState("");
   const [seats, setSeats] = useState("");
   const [message, setMessage] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-        navigate("/login");
+      navigate("/login");
     }
   }, [navigate]);
 
@@ -19,7 +19,7 @@ const Booking = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8080/booking",
+        "https://stepout-backend-164s.onrender.com/booking",
         {
           trainId,
           seats,
@@ -74,7 +74,9 @@ const Booking = () => {
           </button>
         </div>
       </form>
-      {message && <p className="mt-4 text-center text-red-500">{message}</p>}
+      {message && (
+        <p className="mt-4 text-center text-[20px] text-red-400">{message}</p>
+      )}
     </div>
   );
 };

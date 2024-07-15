@@ -15,9 +15,15 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://stepout-backend-164s.onrender.com/user/login", form);
+      const res = await axios.post(
+        "https://stepout-backend-164s.onrender.com/user/login",
+        form
+      );
       localStorage.setItem("token", res.data.token);
-      navigate("/home");
+      if (form.email === "admin@gmail.com" && form.password === "admin") {
+        localStorage.setItem("adminToken", "MASAI");
+      }
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
