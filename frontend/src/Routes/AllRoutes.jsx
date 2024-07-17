@@ -6,6 +6,7 @@ import Signup from "../Pages/Signup";
 import HomePage from "../Pages/HomePage";
 import Booking from "../Pages/Booking";
 import AddTrain from "../Pages/AddTrain";
+import BookingDetails from "../Pages/BookingDetails";
 
 const AllRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const AllRoutes = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/booking" element={<Booking />} />
+        <Route path="/bookingDetail" element={<BookingDetails />} />
         <Route path="/addtrain" element={<AddTrain />} />
       </Routes>
     </div>

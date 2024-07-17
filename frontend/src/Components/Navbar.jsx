@@ -7,12 +7,15 @@ const Navbar = () => {
       <div>
         <p>Railway Management</p>
       </div>
-      <div className="flex justify-between gap-4">
+      <div className="flex justify-between gap-7">
         <div>
           <Link to="/">Home</Link>
         </div>
         <div>
           <Link to="/booking">Ticket</Link>
+        </div>
+        <div>
+          <Link to="/bookingDetail">Booking Details</Link>
         </div>
         <div>
           <Link to="/addTrain">Add Train</Link>

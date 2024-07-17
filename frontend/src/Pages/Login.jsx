@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 const Login = () => {
   const [form, setForm] = useState([]);
@@ -19,6 +20,7 @@ const Login = () => {
         "https://stepout-backend-164s.onrender.com/user/login",
         form
       );
+      toast.success("Login successful!");
       localStorage.setItem("token", res.data.token);
       if (form.email === "admin@gmail.com" && form.password === "admin") {
         localStorage.setItem("adminToken", "MASAI");
@@ -26,11 +28,13 @@ const Login = () => {
       navigate("/");
     } catch (err) {
       console.log(err);
+      toast.error("Login failed. Please try again.");
     }
   };
 
   return (
     <>
+      <ToastContainer />
       <div className="m-8">
         <h2 className="text-[25px] font-bold">Login</h2>
       </div>

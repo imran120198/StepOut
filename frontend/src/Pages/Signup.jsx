@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Signup = () => {
   const [form, setForm] = useState([]);
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -14,14 +19,22 @@ const Signup = () => {
     e.preventDefault();
     axios
       .post("https://stepout-backend-164s.onrender.com/user/signup", form)
-      .then((res) => console.log(res.data))
-      .catch((err) => console.error(err));
+      .then((res) => {
+        console.log(res.data);
+        toast.success("Signup successful!");
+        navigate("/login");
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error("Signup failed. Please try again.");
+      });
   };
 
-  console.log(form)
+  console.log(form);
 
   return (
     <>
+      <ToastContainer />
       <div className="m-8">
         <h2 className="text-[25px] font-bold">Signup</h2>
       </div>

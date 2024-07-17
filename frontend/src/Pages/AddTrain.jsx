@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 const AddTrain = () => {
   const [trainId, setTrainId] = useState("");
@@ -8,13 +9,12 @@ const AddTrain = () => {
   const [source, setSource] = useState("");
   const [destination, setDestination] = useState("");
   const [totalSeats, setTotalSeats] = useState("");
-  const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const adminToken = localStorage.getItem("adminToken");
-    if (!adminToken) {
+    const token = localStorage.getItem("token");
+    if (!token) {
       navigate("/login");
     }
   }, [navigate]);
@@ -33,24 +33,25 @@ const AddTrain = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );
 
       if (response.data.error) {
-        setMessage(response.data.error);
+        toast.error(response.data.error);
       } else {
-        setMessage("Train added successfully!");
+        toast.success("Train added successfully!");
       }
     } catch (err) {
       console.error("Failed to add train", err);
-      setMessage("Failed to add train");
+      toast.error("Failed to add train");
     }
   };
 
   return (
     <div className="flex flex-col items-center justify-center">
+      <ToastContainer />
       <form
         onSubmit={handleAddTrain}
         className="w-full max-w-md p-8 space-y-6 bg-white shadow-md rounded-lg"
@@ -105,7 +106,6 @@ const AddTrain = () => {
           </button>
         </div>
       </form>
-      {message && <p className="mt-4 text-center text-red-500">{message}</p>}
     </div>
   );
 };
