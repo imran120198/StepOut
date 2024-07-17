@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Watch } from "react-loader-spinner";
+import { toast, ToastContainer } from "react-toastify";
 
 const HomePage = () => {
   const [source, setSource] = useState("");
@@ -10,7 +11,7 @@ const HomePage = () => {
 
   const handleTrain = async (e) => {
     e.preventDefault();
-    setIsLoading(true); 
+    setIsLoading(true);
     try {
       const response = await axios.get(
         "https://stepout-backend-164s.onrender.com/train",
@@ -24,7 +25,7 @@ const HomePage = () => {
       setTrains(response.data);
     } catch (err) {
       console.error("Failed to fetch trains", err);
-      alert("Failed to fetch trains");
+      toast.error("Failed to fetch trains");
     } finally {
       setIsLoading(false);
     }
@@ -32,26 +33,35 @@ const HomePage = () => {
 
   return (
     <div>
+      <ToastContainer />
       <form
         onSubmit={handleTrain}
         className="border bg-gray-400 flex flex-row p-5 justify-evenly"
       >
-        <input
-          type="text"
-          placeholder="Source (Delhi)"
+        <select
           value={source}
           onChange={(e) => setSource(e.target.value)}
           required
           className="border p-2 w-[30%]"
-        />
-        <input
-          type="text"
-          placeholder="Destination (Mumbai)"
+        >
+          <option>Source</option>
+          <option>Delhi</option>
+          <option>Ranchi</option>
+          <option>Kolkata</option>
+          <option>Mumbai</option>
+        </select>
+        <select
           value={destination}
           onChange={(e) => setDestination(e.target.value)}
           required
           className="border p-2 w-[30%]"
-        />
+        >
+          <option>Destination</option>
+          <option>Delhi</option>
+          <option>Ranchi</option>
+          <option>Kolkata</option>
+          <option>Mumbai</option>
+        </select>
         <button
           type="submit"
           className="border bg-blue-500 rounded-full w-[10%] font-medium"

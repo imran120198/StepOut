@@ -42,6 +42,7 @@ const AddTrain = () => {
         toast.error(response.data.error);
       } else {
         toast.success("Train added successfully!");
+        window.location.reload();
       }
     } catch (err) {
       console.error("Failed to add train", err);

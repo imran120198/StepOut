@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BookingCard from "./BookingCard";
+import { useNavigate } from "react-router-dom";
 
 const BookingDetails = () => {
   const [bookingId, setBookingId] = useState("");
   const [booking, setBooking] = useState(null);
   const [message, setMessage] = useState("");
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   const handleSearch = async () => {
     try {
@@ -45,9 +55,7 @@ const BookingDetails = () => {
           Search
         </button>
         {message && (
-          <p className="mt-4 text-center text-[20px] text-red-400">
-            {booking._id}
-          </p>
+          <p className="mt-4 text-center text-[20px] text-red-400">{message}</p>
         )}
 
         {booking && <BookingCard booking={booking} />}

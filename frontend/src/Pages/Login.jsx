@@ -2,9 +2,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
-  const [form, setForm] = useState([]);
+  const [form, setForm] = useState({});
+  const [loading, setLoading] = useState(false); // Added loading state
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -15,6 +17,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when the request starts
     try {
       const res = await axios.post(
         "https://stepout-backend-164s.onrender.com/user/login",
@@ -29,6 +32,8 @@ const Login = () => {
     } catch (err) {
       console.log(err);
       toast.error("Login failed. Please try again.");
+    } finally {
+      setLoading(false); // Set loading to false when the request is complete
     }
   };
 
@@ -44,7 +49,7 @@ const Login = () => {
           placeholder="Enter Email"
           type="email"
           name="email"
-          value={form.email}
+          value={form.email || ""}
           onChange={handleChange}
         />
         <input
@@ -52,14 +57,15 @@ const Login = () => {
           placeholder="Enter Password"
           type="password"
           name="password"
-          value={form.password}
+          value={form.password || ""}
           onChange={handleChange}
         />
         <button
           className="border bg-green-500 text-[18px] p-2 font-bold rounded-full"
           type="submit"
+          disabled={loading} 
         >
-          Login
+          {loading ? "Loading..." : "Login"}{" "}
         </button>
       </form>
     </>
