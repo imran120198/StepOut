@@ -13,8 +13,8 @@ const AddTrain = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
+    const adminToken = localStorage.getItem("adminToken");
+    if (!adminToken) {
       navigate("/login");
     }
   }, [navigate]);
@@ -41,18 +41,17 @@ const AddTrain = () => {
       if (response.data.error) {
         toast.error(response.data.error);
       } else {
-        toast.success("Train added successfully!");
-        window.location.reload();
+        toast.success("Train added successfully!")
       }
     } catch (err) {
       console.error("Failed to add train", err);
-      toast.error("Failed to add train");
+      toast.error("Failed to add train")
     }
   };
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <ToastContainer />
+      <ToastContainer/>
       <form
         onSubmit={handleAddTrain}
         className="w-full max-w-md p-8 space-y-6 bg-white shadow-md rounded-lg"
