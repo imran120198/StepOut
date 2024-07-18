@@ -36,3 +36,26 @@ https://stepout-sigma.vercel.app/
    ```
 
 4. Open your browser and navigate to `http://localhost:3000` to view the application.
+
+## Credentials to use
+
+1. For Login
+
+   ```bash
+    email : test@gmail.com
+    password : test
+   ```
+
+2. For Admin
+
+   ```bash
+    email : admin@gmail.com
+    password : admin
+   ```
+
+3. For BookingId
+
+   ```bash
+    BookingId - 66979834d37260fa88312488
+   ```
+
